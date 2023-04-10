@@ -42,7 +42,6 @@ public class SNode<T> implements Comparable<SNode<T>> {
 
 
 
-    @Override
     /**
      * Compares this node to another node
      * 
@@ -51,9 +50,13 @@ public class SNode<T> implements Comparable<SNode<T>> {
      */
     public int compareTo(SNode<T> o) {
         
-        return Comparable.class.cast(this.data).compareTo(o.data);
-        
-    }
-    
-}
+        try {
+            return ((Comparable<T>) data).compareTo(o.data);
 
+        } catch (ClassCastException e) {
+            throw new UnsupportedOperationException("Data of type " + data.getClass().getName() + " does not implement Comparable");
+        }
+    
+    }
+
+}

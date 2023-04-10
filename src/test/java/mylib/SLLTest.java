@@ -12,15 +12,13 @@ public class SLLTest {
 
     @Before
     public void setUp() {
-        SLL<Integer> list = new SLL<Integer>();
+        list = new SLL<Integer>();
         assertNotNull("Constructor did not instantiate Object", list);
     }
 
 
     @Test
     public void insertHeadTest() {
-        System.out.println("insertHeadTest " + this.list);
-        list = new SLL<Integer>();
 
         list.insertHead(1);
         assertEquals(1, list.getSize());
@@ -59,8 +57,21 @@ public class SLLTest {
     public void deleteTest() {
     }
 
+    /**
+     * Tests the sort method
+     */
     @Test
     public void sortTest() {
+
+        for (int i = 0; i < 10; i++) {
+            list.insertHead(i);
+        }
+        list.print();
+
+        list.sort();
+        list.print();
+        assertTrue("List is not sorted",list.isSorted());
+
     }
 
     @Test

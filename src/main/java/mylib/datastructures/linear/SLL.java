@@ -3,12 +3,11 @@ package mylib.datastructures.linear;
 import mylib.datastructures.nodes.SNode;
 
 public class SLL<T> {
-    
+
     protected SNode<T> head;
     protected SNode<T> tail;
-    
-    protected int size;
 
+    protected int size;
 
     /**
      * Creates a new empty list
@@ -22,6 +21,7 @@ public class SLL<T> {
 
     /**
      * Creates a new list with the given head and tail
+     * 
      * @param head
      */
     public SLL(T head) {
@@ -34,13 +34,13 @@ public class SLL<T> {
     /**
      * inserts a node at the head of the list
      * 
-     * @param node the node to insert at the head of the list 
+     * @param node the node to insert at the head of the list
      * 
-     *  1. Create a new node
-     *  2. Set the new node's next pointer to the head
-     *  3. Set the head to the new node
-     *  4. If the list is empty, set the tail to the new node
-     *  5. Increment the size of the list
+     *             1. Create a new node
+     *             2. Set the new node's next pointer to the head
+     *             3. Set the head to the new node
+     *             4. If the list is empty, set the tail to the new node
+     *             5. Increment the size of the list
      */
     public void insertHead(T node) {
         SNode<T> newHead = new SNode<T>(node);
@@ -48,7 +48,7 @@ public class SLL<T> {
         newHead.setNext(head);
 
         head = newHead;
-        
+
         // If the tail is null, set the tail to the new head
         if (tail == null) {
             tail = newHead;
@@ -116,11 +116,13 @@ public class SLL<T> {
     /**
      * Inserts a node in the list in ascending order
      * Must check for list sort validity
-     *    - If list is found to be out of order, it must call the sort function first before inserting
-     *    - Note that you should only execute sort if the list is found to be out of order to avoid 
-     *      slowing down the insertion by executing sorting every time you insert
-     *    - Might need to implement a helper function isSorted(), or find a creative
-     *      way to know if the list is sorted
+     * - If list is found to be out of order, it must call the sort function first
+     * before inserting
+     * - Note that you should only execute sort if the list is found to be out of
+     * order to avoid
+     * slowing down the insertion by executing sorting every time you insert
+     * - Might need to implement a helper function isSorted(), or find a creative
+     * way to know if the list is sorted
      * 
      * @param node
      */
@@ -152,7 +154,7 @@ public class SLL<T> {
         }
 
         insertTail(node);
-        
+
     }
 
     /**
@@ -217,12 +219,15 @@ public class SLL<T> {
     }
 
     /**
-     * Applies insertion sort to the list
-     * The insertion part will start from the head unlike the usual insertion sort algorithm
-     * Note that the sort method and SortedInsert can use each other to efficiently reduce code redundancy (not mandatory)
+     * Applies inplace insertion sort to the list
+     * The insertion part will start from the head unlike the usual insertion sort
+     * algorithm
+     * Note that the sort method and SortedInsert can use each other to efficiently
+     * reduce code redundancy (not mandatory)
+     * 
+     * @return nothing
      */
     public void sort() {
-        
 
         if (head == null || head.getNext() == null) {
             return;
@@ -243,12 +248,10 @@ public class SLL<T> {
         size = sortedList.size;
     }
 
-
     /**
      * Deletes the whole list
      */
     public void clear() {
-
 
         SNode<T> curr = head;
         if (curr == null) {
@@ -267,14 +270,15 @@ public class SLL<T> {
 
     /**
      * Prints the list information on the screen, this includes
-     *      - List Length
-     *      - Sorted Status
-     *      - List Contents
-     *      - Make sure to show information with relevant print statements to be readable by the user
+     * - List Length
+     * - Sorted Status
+     * - List Contents
+     * - Make sure to show information with relevant print statements to be readable
+     * by the user
      */
     public void print() {
         int index = 0;
-        
+
         SNode<T> curr = head;
         System.out.println("----------------------");
         while (curr != null) {
@@ -290,9 +294,9 @@ public class SLL<T> {
 
     }
 
-
     /**
      * Returns the size of the list
+     * 
      * @return
      */
     public int getSize() {
@@ -301,9 +305,11 @@ public class SLL<T> {
 
     /**
      * Determines if the list is sorted
-     *  - If the list is empty, it is considered sorted
-     *  - If the list has only one node, it is considered sorted
-     *  - If the list has more than one node, it is considered sorted if all nodes are in ascending order
+     * - If the list is empty, it is considered sorted
+     * - If the list has only one node, it is considered sorted
+     * - If the list has more than one node, it is considered sorted if all nodes
+     * are in ascending order
+     * 
      * @return true if sorted, false otherwise
      */
     public boolean isSorted() {
@@ -313,9 +319,11 @@ public class SLL<T> {
         }
 
         SNode<T> curr = head;
-        
+
         // traverse through the list and check if the list is sorted
         while (curr.getNext() != null) {
+            System.out.println(curr.get() + " " + curr.getNext().get());
+            System.out.println(curr.compareTo(curr.getNext()) > 0);
             if (curr.compareTo(curr.getNext()) > 0) {
                 return false;
             }
@@ -326,6 +334,7 @@ public class SLL<T> {
 
     /**
      * Returns the head of the list
+     * 
      * @return
      */
     public SNode<T> getHead() {
@@ -335,6 +344,7 @@ public class SLL<T> {
 
     /**
      * Returns the tail of the list
+     * 
      * @return
      */
     public SNode<T> getTail() {
@@ -342,6 +352,4 @@ public class SLL<T> {
         return temp;
     }
 
-    
 }
-

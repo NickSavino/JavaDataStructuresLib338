@@ -59,7 +59,9 @@ public class DNode<T> implements Comparable<DNode<T>> {
      * @return 0 if the data is equal, 1 if this node is greater than the argument node, -1 if this node is less than the argument node
      */
     public int compareTo(DNode<T> o) {
-        return Comparable.class.cast(this.data).compareTo(o);
-        
-    }
+        if (data instanceof Comparable) {
+            return ((Comparable<T>) data).compareTo(o.data);
+        } else {
+            throw new UnsupportedOperationException("Data of type " + data.getClass().getName() + " does not implement Comparable");
+        }    }
 }

@@ -88,13 +88,13 @@ public class DLL<T> {
         }
 
         // If index is equal to the size of the list, insert at tail
-        if (index == getNodeSize()) {
+        if (index == getSize()) {
             insertTail(node);
             return;
         }
 
         // If index is greater than the size of the list, throw an error
-        if (index > getNodeSize()) {
+        if (index > getSize()) {
             throw new IndexOutOfBoundsException("Index is greater than the size of the list");
         }
 
@@ -164,12 +164,14 @@ public class DLL<T> {
      * @param node
      * @return returns the object if found, null otherwise
      */
-    public DNode<T> search(T node) {
+    public T search(T node) {
         DNode<T> curr = head;
         while (curr != null) {
             if (curr.get().equals(node)) {
                 System.out.println("Found node: " + curr.get());
-                return new DNode<T>(curr.get());
+                
+                // return a deep copy of the node
+                return new DNode<T>(curr.get()).get();
             }
             curr = curr.getNext();
         }
@@ -181,11 +183,13 @@ public class DLL<T> {
      */
     public void deleteHead() {
 
+        // If the head is null return
         if (head == null) {
             return;
         }
-
+        // If the head is the tail, set the tail and head to null
         if (head == tail) {
+            head = null;
             tail = null;
         }
 
@@ -323,7 +327,7 @@ public class DLL<T> {
             index++;
         }
         System.out.println("----------------------");
-        System.out.println("List Length: " + getNodeSize());
+        System.out.println("List Length: " + getSize());
         System.out.println("Sorted Status: " + isSorted());
         System.out.println("----------------------");
 
@@ -335,7 +339,7 @@ public class DLL<T> {
      * Returns the size of the list
      * @return
      */
-    public int getNodeSize() {
+    public int getSize() {
         return this.size;
     }
 
@@ -365,5 +369,28 @@ public class DLL<T> {
             
         return true;
     }
+
+
+        /**
+     * Returns the head of the list
+     * 
+     * @return
+     */
+    public DNode<T> getHead() {
+        DNode<T> temp = new DNode<T>(head.get());
+        return temp;
+    }
+
+    /**
+     * Returns the tail of the list
+     * 
+     * @return
+     */
+    public DNode<T> getTail() {
+        DNode<T> temp = new DNode<T>(tail.get());
+        return temp;
+    }
+
+    
     
 }
