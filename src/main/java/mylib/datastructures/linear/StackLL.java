@@ -91,7 +91,7 @@ public class StackLL<T> extends SLL<T> {
     }
 
     @Override
-    public SNode<T> search(T node) {
+    public T search(T node) {
         throw new UnsupportedOperationException("Operation not supporteed for StackLL");
     }
 
