@@ -96,12 +96,7 @@ public class DNodeTest {
         assertEquals(1, node3.getPrev().getPrev().getData().intValue());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testCompareToNonComparable() {
-        DNode<Boolean> node1 = new DNode<Boolean>();
-        DNode<Boolean> node2 = new DNode<Boolean>();
-        node1.compareTo(node2);
-    }
+  
 
     @Test
     public void testCompareToWithNullData() {

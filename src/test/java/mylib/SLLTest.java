@@ -72,6 +72,7 @@ public class SLLTest {
         list.sortedInsert(1);
         list.sortedInsert(4);
         list.sortedInsert(2);
+        list.print();
         assertTrue("List is not sorted after sorted insert", list.isSorted());
     }
 

@@ -149,29 +149,33 @@ public class SLL<T extends Comparable<T>> {
             sort();
         }
 
-        SNode<T> curr = head;
-        if (curr == null) {
+        SNode<T> newNode = new SNode<T>(node);
+
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        if (newNode.compareTo(head) < 0) {
             insertHead(node);
             return;
         }
 
-        SNode<T> newNode = new SNode<T>(node);
+        SNode<T> curr = head;
 
-        int index = 0;
-        while (curr.getNext() != null) {
-            if (curr.getData() == newNode.getData()) {
-                System.out.println("Node already exists");
-                return;
-            }
-            if (newNode.compareTo(curr.getNext()) < 0) {
-                insert(node, index);
-                return;
-            }
+
+        // traverse list until suitable location is found
+        while (curr.getNext() != null && newNode.compareTo(curr.getNext()) >= 0) {
             curr = curr.getNext();
-            index++;
         }
 
-        insertTail(node);
+        // Insert new Node
+        SNode<T> temp = curr.getNext();
+        curr.setNext(newNode);
+        newNode.setNext(temp);
+        size++;
+            
 
     }
 
@@ -224,17 +228,35 @@ public class SLL<T extends Comparable<T>> {
      * @param node
      */
     public void delete(T node) {
-        SNode<T> nodeToDelete = new SNode<T>(node);
-        SNode<T> curr = head;
-        while (curr.getNext() != null) {
-            curr = curr.getNext();
-            if (curr.getNext() == nodeToDelete) {
-                curr.setNext(curr.getNext().getNext());
-                this.size--;
-                return;
+
+        if (head == null) {
+            return;
+        }
+
+        if (head.getData().equals(node)) {
+            head = head.getNext();
+            size--;
+            if (size == 0) {
+                tail = null;
             }
         }
+
+        SNode<T> curr = head.getNext();
+        SNode<T> prev = head;
+        while (curr != null) {
+            if (curr.getData().equals(node)) {
+                if (curr == tail) {
+                    tail = prev;
+                }
+                prev.setNext(curr.getNext());
+                size--;
+                return;
+            }
+            prev = curr;
+            curr = curr.getNext();
+        }
     }
+    
 
     /**
      * Applies inplace insertion sort to the list
