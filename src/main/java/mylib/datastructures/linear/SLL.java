@@ -64,11 +64,18 @@ public class SLL<T> {
     public void insertTail(T node) {
         SNode<T> newNode = new SNode<T>(node);
 
-        tail.setNext(newNode);
-        tail = newNode;
-
-        if (head == null) {
+        // If the tail is null, set the tail to the new node
+        if (tail != null) {
+            tail.setNext(newNode);
+            tail = newNode;
+        }
+        else if (head == null) {
             head = newNode;
+            tail = newNode;
+        }
+        else {
+            head.setNext(newNode);
+            tail = newNode;
         }
         size++;
     }
@@ -101,7 +108,7 @@ public class SLL<T> {
         SNode<T> curr = head;
 
         // Traverse to the node before the index
-        for (int i = 0; i < index; i++) {
+        while (curr.getNext() != null && index > 1) {
             curr = curr.getNext();
         }
 
@@ -163,13 +170,13 @@ public class SLL<T> {
      * @param node
      * @return returns the object if found, null otherwise
      */
-    public SNode<T> search(T node) {
+    public T search(T node) {
         SNode<T> nodeToFind = new SNode<T>(node);
         SNode<T> curr = head;
         while (curr != null) {
             if (curr.get() == nodeToFind.get()) {
                 System.out.println("Found node: " + curr.get());
-                return new SNode<T>(curr.get());
+                return curr.get();
             }
             curr = curr.getNext();
         }

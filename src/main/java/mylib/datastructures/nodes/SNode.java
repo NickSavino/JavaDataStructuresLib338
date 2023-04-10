@@ -50,6 +50,14 @@ public class SNode<T> implements Comparable<SNode<T>> {
      */
     public int compareTo(SNode<T> o) {
         
+        if (data == null && o.data == null) {
+            return 0;
+        } else if (data == null) {
+            return -1;
+        } else if (o.data == null) {
+            return 1;
+        }
+
         try {
             return ((Comparable<T>) data).compareTo(o.data);
 

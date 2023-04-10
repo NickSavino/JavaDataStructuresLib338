@@ -19,7 +19,7 @@ public class QueueLL<T> extends SLL<T> {
     }
 
     public QueueLL(T data) {
-
+        super(data);
     }
 
     /**
@@ -28,6 +28,7 @@ public class QueueLL<T> extends SLL<T> {
      */
     public void enqueue(T node) {
         super.insertTail(node);
+        this.size++;
     }
 
     /**
@@ -43,6 +44,7 @@ public class QueueLL<T> extends SLL<T> {
 
         SNode<T> data = super.getHead();
         super.deleteHead();
+        this.size--;
         return data.get();
     }
 
@@ -59,6 +61,7 @@ public class QueueLL<T> extends SLL<T> {
         }
         return false;
     }
+    
 
     @Override
     public void insertHead(T node) {
@@ -82,7 +85,7 @@ public class QueueLL<T> extends SLL<T> {
     }
 
     @Override
-    public SNode<T> search(T node) {
+    public T search(T node) {
         throw new UnsupportedOperationException("Operation not supporteed for QueueLL");
     }
 
