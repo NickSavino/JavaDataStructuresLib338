@@ -53,12 +53,14 @@ public class SLLTest {
     @Test
     public void insertTest() {
         list.clear();
+        assertEquals("List is not empty", 0, list.getSize());
         list.insert(1, 0);
         list.print();
         list.insert(3, 1);
         list.print();
         list.insert(2, 1);
         list.print();
+        System.out.println(list.getHead().getNext());
         assertEquals("Value at index 1 does not match expected value", (Integer) 2, list.getHead().getNext().getData());
     }
 
@@ -70,6 +72,7 @@ public class SLLTest {
         list.sortedInsert(1);
         list.sortedInsert(4);
         list.sortedInsert(2);
+        list.print();
         assertTrue("List is not sorted after sorted insert", list.isSorted());
     }
 

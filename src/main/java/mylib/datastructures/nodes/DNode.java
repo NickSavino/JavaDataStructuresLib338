@@ -1,6 +1,6 @@
 package mylib.datastructures.nodes;
 
-public class DNode<T> implements Comparable<DNode<T>> {
+public class DNode<T extends Comparable<T>> implements Comparable<DNode<T>> {
     
     // T stands for type
     private T data;
@@ -18,6 +18,12 @@ public class DNode<T> implements Comparable<DNode<T>> {
         this.data = data;
         this.next = null;
         this.prev = null;
+    }
+
+    // Constructor with node as argument
+    public DNode(DNode<T> node) {
+        this.data = node.data;
+        this.next = node.next;
     }
 
     
@@ -69,7 +75,7 @@ public class DNode<T> implements Comparable<DNode<T>> {
         }
 
         try {
-            return ((Comparable<T>) data).compareTo(o.data);
+            return data.compareTo(o.data);
 
         } catch (ClassCastException e) {
             throw new UnsupportedOperationException("Data of type " + data.getClass().getName() + " does not implement Comparable");

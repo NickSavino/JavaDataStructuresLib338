@@ -2,7 +2,7 @@ package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.SNode;
 
-public class SLL<T> {
+public class SLL<T extends Comparable<T>> {
 
     protected SNode<T> head;
     protected SNode<T> tail;
@@ -95,7 +95,7 @@ public class SLL<T> {
         }
 
         // If index is equal to the size of the list, insert at tail
-        if (index == getSize()) {
+        if (index == this.size) {
             insertTail(node);
             return;
         }
@@ -107,9 +107,20 @@ public class SLL<T> {
 
         SNode<T> curr = head;
 
+        if (this.size == 1) {
+            if (index == 1) {
+                insertTail(node);
+            }
+            else {
+                insertHead(node);
+            }
+            return;
+        }
+
         // Traverse to the node before the index
         while (curr.getNext() != null && index > 1) {
             curr = curr.getNext();
+            index--;
         }
 
         // set the nodes next pointer to the node at the index
@@ -138,29 +149,33 @@ public class SLL<T> {
             sort();
         }
 
-        SNode<T> curr = head;
-        if (curr == null) {
+        SNode<T> newNode = new SNode<T>(node);
+
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        if (newNode.compareTo(head) < 0) {
             insertHead(node);
             return;
         }
 
-        SNode<T> newNode = new SNode<T>(node);
+        SNode<T> curr = head;
 
-        int index = 0;
-        while (curr.getNext() != null) {
-            if (curr.getData() == newNode.getData()) {
-                System.out.println("Node already exists");
-                return;
-            }
-            if (newNode.compareTo(curr.getNext()) < 0) {
-                insert(node, index);
-                return;
-            }
+
+        // traverse list until suitable location is found
+        while (curr.getNext() != null && newNode.compareTo(curr.getNext()) >= 0) {
             curr = curr.getNext();
-            index++;
         }
 
-        insertTail(node);
+        // Insert new Node
+        SNode<T> temp = curr.getNext();
+        curr.setNext(newNode);
+        newNode.setNext(temp);
+        size++;
+            
 
     }
 
@@ -213,17 +228,35 @@ public class SLL<T> {
      * @param node
      */
     public void delete(T node) {
-        SNode<T> nodeToDelete = new SNode<T>(node);
-        SNode<T> curr = head;
-        while (curr.getNext() != null) {
-            curr = curr.getNext();
-            if (curr.getNext() == nodeToDelete) {
-                curr.setNext(curr.getNext().getNext());
-                this.size--;
-                return;
+
+        if (head == null) {
+            return;
+        }
+
+        if (head.getData().equals(node)) {
+            head = head.getNext();
+            size--;
+            if (size == 0) {
+                tail = null;
             }
         }
+
+        SNode<T> curr = head.getNext();
+        SNode<T> prev = head;
+        while (curr != null) {
+            if (curr.getData().equals(node)) {
+                if (curr == tail) {
+                    tail = prev;
+                }
+                prev.setNext(curr.getNext());
+                size--;
+                return;
+            }
+            prev = curr;
+            curr = curr.getNext();
+        }
     }
+    
 
     /**
      * Applies inplace insertion sort to the list
@@ -329,8 +362,6 @@ public class SLL<T> {
 
         // traverse through the list and check if the list is sorted
         while (curr.getNext() != null) {
-            System.out.println(curr.getData() + " " + curr.getNext().getData());
-            System.out.println(curr.compareTo(curr.getNext()) > 0);
             if (curr.compareTo(curr.getNext()) > 0) {
                 return false;
             }
@@ -345,7 +376,7 @@ public class SLL<T> {
      * @return
      */
     public SNode<T> getHead() {
-        SNode<T> temp = new SNode<T>(head.getData());
+        SNode<T> temp = new SNode<T>(head);
         return temp;
     }
 
@@ -355,7 +386,7 @@ public class SLL<T> {
      * @return
      */
     public SNode<T> getTail() {
-        SNode<T> temp = new SNode<T>(tail.getData());
+        SNode<T> temp = new SNode<T>(tail);
         return temp;
     }
 

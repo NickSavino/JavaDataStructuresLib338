@@ -2,7 +2,7 @@ package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.DNode;
 
-public class DLL<T> {
+public class DLL<T extends Comparable<T>> {
 
     protected DNode<T> head;
     protected DNode<T> tail;

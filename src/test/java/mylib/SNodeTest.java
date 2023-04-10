@@ -15,8 +15,7 @@ public class SNodeTest {
 
         SNode<Integer> node = new SNode<Integer>();
         SNode<String> node2 = new SNode<String>();
-        SNode<ArrayList<Boolean>> node3 = new SNode<ArrayList<Boolean>>();
-        SNode<HashMap<String, Integer>> node4 = new SNode<HashMap<String, Integer>>();
+        SNode<Boolean> node3 = new SNode<Boolean>();
 
     }
 
@@ -25,8 +24,7 @@ public class SNodeTest {
     public void testConstructorWithArgument() {
         SNode<Integer> node = new SNode<Integer>(1);
         SNode<String> node2 = new SNode<String>("hello");
-        SNode<ArrayList<Boolean>> node3 = new SNode<ArrayList<Boolean>>(new ArrayList<Boolean>());
-        SNode<HashMap<String, Integer>> node4 = new SNode<HashMap<String, Integer>>(new HashMap<String, Integer>());
+        SNode<Boolean> node3 = new SNode<Boolean>();
 
         assertEquals(1, node.getData().intValue());
         assertEquals("hello", node2.getData());
@@ -77,19 +75,11 @@ public class SNodeTest {
         assertEquals(1, node3.compareTo(node2));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testCompareToUnsupportedOperation() {
-        SNode<Object> node1 = new SNode<Object>(new Object());
-        SNode<Object> node2 = new SNode<Object>(new Object());
-
-        node1.compareTo(node2);
-    }
-
     @Test
     public void testCompareToWithNullData() {
         SNode<Integer> node1 = new SNode<Integer>(1);
-        SNode<Integer> node2 = new SNode<Integer>(null);
-        SNode<Integer> node3 = new SNode<Integer>(null);
+        SNode<Integer> node2 = new SNode<Integer>();
+        SNode<Integer> node3 = new SNode<Integer>();
 
         assertEquals(1, node1.compareTo(node2));
         assertEquals(-1, node2.compareTo(node1));
