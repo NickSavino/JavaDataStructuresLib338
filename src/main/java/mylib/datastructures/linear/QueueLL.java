@@ -45,14 +45,14 @@ public class QueueLL<T> extends SLL<T> {
         SNode<T> data = super.getHead();
         super.deleteHead();
         this.size--;
-        return data.get();
+        return data.getData();
     }
 
     public T peek() {
         if (isEmpty()) {
             return null;
         }
-        return super.getHead().get();
+        return super.getHead().getData();
     }
 
     public boolean isEmpty() {

@@ -26,7 +26,7 @@ public class SLLTest {
         list.insertHead(2);
         assertEquals(2, list.getSize());
         String errorString = "Value at head Does not match expected value";
-        int head = list.getHead().get();
+        int head = list.getHead().getData();
         assertEquals(errorString, 2, head);
     }
 
@@ -46,7 +46,7 @@ public class SLLTest {
         assertEquals(1, list.getSize());
         list.insertTail(2);
         assertEquals(2, list.getSize());
-        int tail = list.getTail().get();
+        int tail = list.getTail().getData();
         assertEquals("Value at tail does not match expected value", 2, tail);
     }
 
@@ -59,7 +59,7 @@ public class SLLTest {
         list.print();
         list.insert(2, 1);
         list.print();
-        assertEquals("Value at index 1 does not match expected value", (Integer) 2, list.getHead().getNext().get());
+        assertEquals("Value at index 1 does not match expected value", (Integer) 2, list.getHead().getNext().getData());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class SLLTest {
         list.insertHead(2);
         list.deleteHead();
         assertEquals("Head not deleted", 1, list.getSize());
-        assertEquals("Value at head does not match expected value", (Integer) 1, list.getHead().get());
+        assertEquals("Value at head does not match expected value", (Integer) 1, list.getHead().getData());
     }
 
     @Test

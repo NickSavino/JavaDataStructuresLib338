@@ -22,11 +22,11 @@ public class SNode<T> implements Comparable<SNode<T>> {
         this.next = null;
     }
 
-    public void set(T data) {
+    public void setData(T data) {
         this.data = data;
     }
 
-    public T get() {
+    public T getData() {
         T data = this.data;
         return data;
     }

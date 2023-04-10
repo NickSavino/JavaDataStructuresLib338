@@ -148,7 +148,7 @@ public class SLL<T> {
 
         int index = 0;
         while (curr.getNext() != null) {
-            if (curr.get() == newNode.get()) {
+            if (curr.getData() == newNode.getData()) {
                 System.out.println("Node already exists");
                 return;
             }
@@ -174,9 +174,9 @@ public class SLL<T> {
         SNode<T> nodeToFind = new SNode<T>(node);
         SNode<T> curr = head;
         while (curr != null) {
-            if (curr.get() == nodeToFind.get()) {
-                System.out.println("Found node: " + curr.get());
-                return curr.get();
+            if (curr.getData() == nodeToFind.getData()) {
+                System.out.println("Found node: " + curr.getData());
+                return curr.getData();
             }
             curr = curr.getNext();
         }
@@ -245,7 +245,7 @@ public class SLL<T> {
 
         while (curr != null) {
             SNode<T> nextNode = curr.getNext();
-            T value = curr.get();
+            T value = curr.getData();
             sortedList.sortedInsert(value);
             curr = nextNode;
         }
@@ -290,7 +290,7 @@ public class SLL<T> {
         System.out.println("----------------------");
         while (curr != null) {
             System.out.print("  Index: " + index);
-            System.out.println(" | Node: " + curr.get());
+            System.out.println(" | Node: " + curr.getData());
             curr = curr.getNext();
             index++;
         }
@@ -329,7 +329,7 @@ public class SLL<T> {
 
         // traverse through the list and check if the list is sorted
         while (curr.getNext() != null) {
-            System.out.println(curr.get() + " " + curr.getNext().get());
+            System.out.println(curr.getData() + " " + curr.getNext().getData());
             System.out.println(curr.compareTo(curr.getNext()) > 0);
             if (curr.compareTo(curr.getNext()) > 0) {
                 return false;
@@ -345,7 +345,7 @@ public class SLL<T> {
      * @return
      */
     public SNode<T> getHead() {
-        SNode<T> temp = new SNode<T>(head.get());
+        SNode<T> temp = new SNode<T>(head.getData());
         return temp;
     }
 
@@ -355,7 +355,7 @@ public class SLL<T> {
      * @return
      */
     public SNode<T> getTail() {
-        SNode<T> temp = new SNode<T>(tail.get());
+        SNode<T> temp = new SNode<T>(tail.getData());
         return temp;
     }
 

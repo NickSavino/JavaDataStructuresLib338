@@ -28,8 +28,8 @@ public class SNodeTest {
         SNode<ArrayList<Boolean>> node3 = new SNode<ArrayList<Boolean>>(new ArrayList<Boolean>());
         SNode<HashMap<String, Integer>> node4 = new SNode<HashMap<String, Integer>>(new HashMap<String, Integer>());
 
-        assertEquals(1, node.get().intValue());
-        assertEquals("hello", node2.get());
+        assertEquals(1, node.getData().intValue());
+        assertEquals("hello", node2.getData());
     }
 
     @Test
@@ -37,11 +37,11 @@ public class SNodeTest {
         SNode<Integer> node = new SNode<Integer>(1);
         SNode<String> node2 = new SNode<String>("hello");
 
-        node.set(2);
-        node2.set("world");
+        node.setData(2);
+        node2.setData("world");
 
-        assertEquals(2, node.get().intValue());
-        assertEquals("world", node2.get());
+        assertEquals(2, node.getData().intValue());
+        assertEquals("world", node2.getData());
     }
 
     @Test
@@ -49,8 +49,8 @@ public class SNodeTest {
         SNode<Integer> node = new SNode<Integer>(1);
         SNode<String> node2 = new SNode<String>("hello");
 
-        assertEquals(1, node.get().intValue());
-        assertEquals("hello", node2.get());
+        assertEquals(1, node.getData().intValue());
+        assertEquals("hello", node2.getData());
     }
 
     @Test
