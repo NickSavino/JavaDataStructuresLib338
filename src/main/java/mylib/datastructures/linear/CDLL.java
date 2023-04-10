@@ -2,7 +2,7 @@ package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.DNode;
 
-public class CDLL<T> extends DLL<T> {
+public class CDLL<T extends Comparable<T>> extends DLL<T> {
     
     /**
      * Constructor to initialize an empty list

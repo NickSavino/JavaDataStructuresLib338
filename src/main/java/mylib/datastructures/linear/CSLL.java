@@ -2,7 +2,7 @@ package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.SNode;
 
-public class CSLL<T> extends SLL<T> {
+public class CSLL<T extends Comparable<T>> extends SLL<T> {
     
     public CSLL() {
         super();

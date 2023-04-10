@@ -14,8 +14,7 @@ public class DNodeTest {
     public void testConstructorTypes() {
         DNode<Integer> node = new DNode<Integer>();
         DNode<String> node2 = new DNode<String>();
-        DNode<ArrayList<Boolean>> node3 = new DNode<ArrayList<Boolean>>();
-        DNode<HashMap<String, Integer>> node4 = new DNode<HashMap<String, Integer>>();
+        DNode<Boolean> node3 = new DNode<Boolean>();
     }
 
     @Test
@@ -99,8 +98,8 @@ public class DNodeTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void testCompareToNonComparable() {
-        DNode<ArrayList<Boolean>> node1 = new DNode<ArrayList<Boolean>>(new ArrayList<Boolean>());
-        DNode<ArrayList<Boolean>> node2 = new DNode<ArrayList<Boolean>>(new ArrayList<Boolean>());
+        DNode<Boolean> node1 = new DNode<Boolean>();
+        DNode<Boolean> node2 = new DNode<Boolean>();
         node1.compareTo(node2);
     }
 

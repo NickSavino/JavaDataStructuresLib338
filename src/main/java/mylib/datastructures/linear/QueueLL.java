@@ -10,7 +10,7 @@ import mylib.datastructures.nodes.SNode;
  * new elments are inserted at the tail
  * items are dequeued at the head
  */
-public class QueueLL<T> extends SLL<T> {
+public class QueueLL<T extends Comparable<T>> extends SLL<T> {
     
 
 

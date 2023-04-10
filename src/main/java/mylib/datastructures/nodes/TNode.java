@@ -32,6 +32,16 @@ public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
         this.right = R;
     }
 
+    // Constructor with node as argument
+    public TNode(TNode<T> node) {
+        this.data = node.data;
+        this.parent = node.parent;
+        this.left = node.left;
+        this.right = node.right;
+        this.balance = node.balance;
+    }
+
+
     public T getData() {
         T tmp = this.data;
         return tmp;

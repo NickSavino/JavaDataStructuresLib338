@@ -2,7 +2,7 @@ package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.SNode;
 
-public class StackLL<T> extends SLL<T> {
+public class StackLL<T extends Comparable<T>> extends SLL<T> {
     
     //pointer that keeps a reference to the top of the stack
     protected SNode<T> top;

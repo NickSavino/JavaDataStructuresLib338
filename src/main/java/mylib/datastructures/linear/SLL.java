@@ -2,7 +2,7 @@ package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.SNode;
 
-public class SLL<T> {
+public class SLL<T extends Comparable<T>> {
 
     protected SNode<T> head;
     protected SNode<T> tail;
@@ -95,7 +95,7 @@ public class SLL<T> {
         }
 
         // If index is equal to the size of the list, insert at tail
-        if (index == getSize()) {
+        if (index == this.size) {
             insertTail(node);
             return;
         }
@@ -107,9 +107,20 @@ public class SLL<T> {
 
         SNode<T> curr = head;
 
+        if (this.size == 1) {
+            if (index == 1) {
+                insertTail(node);
+            }
+            else {
+                insertHead(node);
+            }
+            return;
+        }
+
         // Traverse to the node before the index
         while (curr.getNext() != null && index > 1) {
             curr = curr.getNext();
+            index--;
         }
 
         // set the nodes next pointer to the node at the index
@@ -329,8 +340,6 @@ public class SLL<T> {
 
         // traverse through the list and check if the list is sorted
         while (curr.getNext() != null) {
-            System.out.println(curr.getData() + " " + curr.getNext().getData());
-            System.out.println(curr.compareTo(curr.getNext()) > 0);
             if (curr.compareTo(curr.getNext()) > 0) {
                 return false;
             }
@@ -345,7 +354,7 @@ public class SLL<T> {
      * @return
      */
     public SNode<T> getHead() {
-        SNode<T> temp = new SNode<T>(head.getData());
+        SNode<T> temp = new SNode<T>(head);
         return temp;
     }
 
@@ -355,7 +364,7 @@ public class SLL<T> {
      * @return
      */
     public SNode<T> getTail() {
-        SNode<T> temp = new SNode<T>(tail.getData());
+        SNode<T> temp = new SNode<T>(tail);
         return temp;
     }
 
