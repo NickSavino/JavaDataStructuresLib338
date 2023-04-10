@@ -17,8 +17,8 @@ public class CSLLTest {
         list.insertTail(15);
 
         assertEquals(3, list.getSize());
-        assertEquals(5, (int) list.getHead().get());
-        assertEquals(15, (int) list.getTail().get());
+        assertEquals(5, (int) list.getHead().getData());
+        assertEquals(15, (int) list.getTail().getData());
     }
 
     @Test
@@ -30,21 +30,23 @@ public class CSLLTest {
         list.insertHead("cherry");
 
         assertEquals(3, list.getSize());
-        assertEquals("cherry", list.getHead().get());
-        assertEquals("apple", list.getTail().get());
+        assertEquals("cherry", list.getHead().getData());
+        assertEquals("apple", list.getTail().getData());
     }
 
     @Test
-    public void testInsertAt() {
+    public void testInsert() {
         CSLL<Integer> list = new CSLL<>();
 
-        list.insert(0, 5);
-        list.insert(1, 10);
-        list.insert(1, 7);
+        list.insert(5, 0);
+        list.insert(10, 1);
+        list.insert(15, 2);
+
 
         assertEquals(3, list.getSize());
-        assertEquals(5, (int) list.getHead().get());
-        assertEquals(10, (int) list.getTail().get());
+        assertEquals(5, (int) list.getHead().getData());
+        assertEquals(10, (int) list.getHead().getNext().getData());
+        assertEquals(15, (int) list.getTail().getData());
     }
 
     @Test
@@ -57,8 +59,8 @@ public class CSLLTest {
         list.deleteHead();
 
         assertEquals(2, list.getSize());
-        assertEquals("banana", list.getHead().get());
-        assertEquals("cherry", list.getTail().get());
+        assertEquals("banana", list.getHead().getData());
+        assertEquals("cherry", list.getTail().getData());
     }
 
     @Test
@@ -71,22 +73,22 @@ public class CSLLTest {
         list.deleteTail();
 
         assertEquals(2, list.getSize());
-        assertEquals(5, (int) list.getHead().get());
-        assertEquals(10, (int) list.getTail().get());
+        assertEquals(5, (int) list.getHead().getData());
+        assertEquals(10, (int) list.getTail().getData());
     }
 
     @Test
-    public void testDeleteAt() {
+    public void testDelete() {
         CSLL<Integer> list = new CSLL<>();
         list.insertTail(5);
         list.insertTail(10);
         list.insertTail(15);
 
-        list.delete(1);
+        list.delete(10);
 
         assertEquals(2, list.getSize());
-        assertEquals(5, (int) list.getHead().get());
-        assertEquals(15, (int) list.getTail().get());
+        assertEquals(5, (int) list.getHead().getData());
+        assertEquals(15, (int) list.getTail().getData());
     }
 
     @Test

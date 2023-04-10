@@ -21,11 +21,11 @@ public class DNode<T> implements Comparable<DNode<T>> {
     }
 
     
-    public void set(T data) {
+    public void setData(T data) {
         this.data = data;
     }
 
-    public T get() {
+    public T getData() {
         T data = this.data;
         return data;
     }

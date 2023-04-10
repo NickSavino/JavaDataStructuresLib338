@@ -54,7 +54,7 @@ public class DLLTest {
         list.insertHead(1);
         list.insertHead(2);
         assertEquals("list is not expected size", 2, list.getSize());
-        assertEquals("head is not expected value", 2, list.getHead().get().intValue());
+        assertEquals("head is not expected value", 2, list.getHead().getData().intValue());
     }
 
     /**
@@ -70,8 +70,8 @@ public class DLLTest {
         list.insertTail(3);
         list.insertTail(4);
         assertEquals("list is not expected size", 4, list.getSize());
-        assertEquals("tail is not expected value", 4, list.getTail().get().intValue());
-        assertEquals("head is not expected value", 1, list.getHead().get().intValue());
+        assertEquals("tail is not expected value", 4, list.getTail().getData().intValue());
+        assertEquals("head is not expected value", 1, list.getHead().getData().intValue());
     }
 
     /**
@@ -84,20 +84,20 @@ public class DLLTest {
 
         list.insert(1, 0);
         assertEquals("list is not expected size", 1, list.getSize());
-        assertEquals("head is not expected value", 1, list.getHead().get().intValue());
-        assertEquals("tail is not expected value", 1, list.getTail().get().intValue());
+        assertEquals("head is not expected value", 1, list.getHead().getData().intValue());
+        assertEquals("tail is not expected value", 1, list.getTail().getData().intValue());
 
         list.insert(2, 0);
         assertEquals("list is not expected size", 2, list.getSize());
-        assertEquals("head is not expected value", 2, list.getHead().get().intValue());
-        assertEquals("tail is not expected value", 1, list.getTail().get().intValue());
+        assertEquals("head is not expected value", 2, list.getHead().getData().intValue());
+        assertEquals("tail is not expected value", 1, list.getTail().getData().intValue());
 
         list.insert(3, 2);
         list.insert(50, 1);
         list.insert(134, 4);
         assertEquals("list is not expected size", 5, list.getSize());
-        assertEquals("head is not expected value", 2, list.getHead().get().intValue());
-        assertEquals("tail is not expected value", 134, list.getTail().get().intValue());
+        assertEquals("head is not expected value", 2, list.getHead().getData().intValue());
+        assertEquals("tail is not expected value", 134, list.getTail().getData().intValue());
         assertEquals("value at index 1 is not expected value", 50, list.search(50).intValue());
     }
 

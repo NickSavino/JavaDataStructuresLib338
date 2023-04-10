@@ -39,7 +39,7 @@ public class StackLL<T> extends SLL<T> {
         if (isEmpty()) {
             throw new IllegalAccessError("Stack is empty");
         }
-        T data = top.get();
+        T data = top.getData();
         // Updates the top pointer to the next element
         top = top.getNext();
         size--;
@@ -55,7 +55,7 @@ public class StackLL<T> extends SLL<T> {
         if (isEmpty()) {
             throw new IllegalAccessError("Stack is empty");
         }
-        return top.get();
+        return top.getData();
     }
 
     /**

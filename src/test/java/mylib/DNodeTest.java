@@ -23,8 +23,8 @@ public class DNodeTest {
         DNode<Integer> node = new DNode<Integer>(1);
         DNode<String> node2 = new DNode<String>("hello");
 
-        assertEquals(1, node.get().intValue());
-        assertEquals("hello", node2.get());
+        assertEquals(1, node.getData().intValue());
+        assertEquals("hello", node2.getData());
     }
 
     @Test
@@ -32,11 +32,11 @@ public class DNodeTest {
         DNode<Integer> node = new DNode<Integer>(1);
         DNode<String> node2 = new DNode<String>("hello");
 
-        node.set(2);
-        node2.set("world");
+        node.setData(2);
+        node2.setData("world");
 
-        assertEquals(2, node.get().intValue());
-        assertEquals("world", node2.get());
+        assertEquals(2, node.getData().intValue());
+        assertEquals("world", node2.getData());
     }
 
     @Test
@@ -44,8 +44,8 @@ public class DNodeTest {
         DNode<Integer> node = new DNode<Integer>(1);
         DNode<String> node2 = new DNode<String>("hello");
 
-        assertEquals(1, node.get().intValue());
-        assertEquals("hello", node2.get());
+        assertEquals(1, node.getData().intValue());
+        assertEquals("hello", node2.getData());
     }
 
     @Test
@@ -65,6 +65,36 @@ public class DNodeTest {
         assertEquals(node3, node2.getNext());
         assertEquals(node2, node3.getPrev());
         assertNull(node3.getNext());
+    }
+
+    @Test
+    public void testNextGetData() {
+        DNode<Integer> node1 = new DNode<Integer>(1);
+        DNode<Integer> node2 = new DNode<Integer>(2);
+        DNode<Integer> node3 = new DNode<Integer>(3);
+
+        node1.setNext(node2);
+        node2.setNext(node3);
+
+        assertEquals(2, node1.getNext().getData().intValue());
+        assertEquals(3, node1.getNext().getNext().getData().intValue());
+    }
+
+    @Test
+    public void testPrevGetData() {
+        DNode<Integer> node1 = new DNode<Integer>(1);
+        DNode<Integer> node2 = new DNode<Integer>(2);
+        DNode<Integer> node3 = new DNode<Integer>(3);
+
+        node1.setNext(node2);
+        node2.setNext(node3);
+
+        // Set previous nodes
+        node2.setPrev(node1);
+        node3.setPrev(node2);
+
+        assertEquals(2, node3.getPrev().getData().intValue());
+        assertEquals(1, node3.getPrev().getPrev().getData().intValue());
     }
 
     @Test(expected = UnsupportedOperationException.class)

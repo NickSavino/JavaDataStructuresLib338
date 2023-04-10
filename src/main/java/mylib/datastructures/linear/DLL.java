@@ -143,7 +143,7 @@ public class DLL<T> {
 
         int index = 0;
         while (curr.getNext() != null) {
-            if (curr.get() == newNode.get()) {
+            if (curr.getData() == newNode.getData()) {
                 return;
             }
             if (newNode.compareTo(curr.getNext()) < 0) {
@@ -167,11 +167,11 @@ public class DLL<T> {
     public T search(T node) {
         DNode<T> curr = head;
         while (curr != null) {
-            if (curr.get().equals(node)) {
-                System.out.println("Found node: " + curr.get());
+            if (curr.getData().equals(node)) {
+                System.out.println("Found node: " + curr.getData());
                 
                 // return a deep copy of the node
-                return new DNode<T>(curr.get()).get();
+                return new DNode<T>(curr.getData()).getData();
             }
             curr = curr.getNext();
         }
@@ -231,12 +231,12 @@ public class DLL<T> {
      */
     public void delete(T node) {
         
-        if (head.get().equals(node)) {
+        if (head.getData().equals(node)) {
             deleteHead();
             return;
         }
 
-        if (tail.get().equals(node)) {
+        if (tail.getData().equals(node)) {
             deleteTail();
             return;
         }
@@ -244,7 +244,7 @@ public class DLL<T> {
         DNode<T> curr = head;
 
         //traverse list
-        while (curr != null && !curr.get().equals(node)) {
+        while (curr != null && !curr.getData().equals(node)) {
             curr = curr.getNext();
         }
 
@@ -279,7 +279,7 @@ public class DLL<T> {
 
         while (curr != null) {
             DNode<T> nextNode = curr.getNext();
-            T value = curr.get();
+            T value = curr.getData();
             sortedList.sortedInsert(value);
             curr = nextNode;
         }
@@ -322,7 +322,7 @@ public class DLL<T> {
         System.out.println("----------------------");
         while (curr != null) {
             System.out.print("  Index: " + index);
-            System.out.println(" | Node: " + curr.get());
+            System.out.println(" | Node: " + curr.getData());
             curr = curr.getNext();
             index++;
         }
@@ -377,7 +377,7 @@ public class DLL<T> {
      * @return
      */
     public DNode<T> getHead() {
-        DNode<T> temp = new DNode<T>(head.get());
+        DNode<T> temp = new DNode<T>(head.getData());
         return temp;
     }
 
@@ -387,7 +387,7 @@ public class DLL<T> {
      * @return
      */
     public DNode<T> getTail() {
-        DNode<T> temp = new DNode<T>(tail.get());
+        DNode<T> temp = new DNode<T>(tail.getData());
         return temp;
     }
 
