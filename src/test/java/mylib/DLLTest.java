@@ -5,9 +5,12 @@ package mylib;
 import org.junit.Test;
 
 import mylib.datastructures.linear.DLL;
+import mylib.datastructures.nodes.DNode;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Random;
 
 import org.junit.Before;
@@ -114,7 +117,6 @@ public class DLLTest {
             list.insertTail(i);
         }
         assertEquals("list is not expected size", 10, list.getSize());
-        list.insertHead(1);
         assertTrue("list is not sorted", list.isSorted());
     }
 
@@ -128,10 +130,12 @@ public class DLLTest {
         list.clear();
         
         int randInt;
-        for (int i = 0; i > 100; i++) {
+        for (int i = 0; i < 100; i++) {
             randInt = random.nextInt();
             list.insertHead(randInt);
         }
+
+        assertFalse(list.isSorted());
     }
 
     /**
@@ -140,22 +144,40 @@ public class DLLTest {
      * 
      */
     @Test
-    public void sortTest() {
-
+    public void testSort() {
         list.clear();
+        list.insertTail(3);
+        list.insertTail(1);
+        list.insertTail(4);
+        list.insertTail(2);
+        list.sort();
+        DNode<Integer> curr = list.getHead();
+        while (curr.getNext() != null) {
+            assertTrue(curr.getData() <= curr.getNext().getData());
+            curr = curr.getNext();
+        }
+    }
 
-
+    @Test
+    public void testSortRandomValues() {
+        list.clear();
         int randInt;
-        for (int i = 0; i > 100; i++) {
+        for (int i = 0; i < 25; i++) {
             randInt = random.nextInt();
-            System.out.println(randInt);
             list.insertHead(randInt);
         }
-        assertEquals("list is not expected size", 100, list.getSize());
-        
+
         list.sort();
-        assertTrue("list is not sorted", list.isSorted());
+        DNode<Integer> curr = list.getHead();
+        while (curr.getNext() != null) {
+            assertTrue(curr.getData() <= curr.getNext().getData());
+            curr = curr.getNext();
+        }
+
+        assertTrue(list.isSorted());
+        
     }
+    
 
     /**
      * Tests the sortedInsert method
@@ -163,7 +185,14 @@ public class DLLTest {
      */
     @Test
     public void sortedInsertTest() {
+        list.clear();
+        assertTrue(list.isSorted());
+        for (int i = 0; i < 25; i++) {
+            int value = random.nextInt(1000);
+            list.sortedInsert(value);
+        }
 
+        assertTrue(list.isSorted());
 
     }
 
@@ -173,6 +202,19 @@ public class DLLTest {
      */
     @Test
     public void searchTest() {
+        list.clear();
+
+        for (int i = 0; i < 100; i++) {
+            list.insertTail(i);
+        }
+
+        int node = list.search(50);
+        assertEquals("node is not expected value", 50, node);
+        node = list.search(0);
+        assertEquals("node is not expected value", 0, node);
+        node = list.search(99);
+        assertEquals("node is not expected value", 99, node);
+
     }
 
     /**
@@ -181,6 +223,19 @@ public class DLLTest {
      */
     @Test
     public void deleteHeadTest() {
+        list.insertHead(1);
+        list.insertHead(2);
+        list.insertHead(3);
+
+        list.deleteHead();
+        assertEquals(2, (int) list.getHead().getData());
+
+        list.deleteHead();
+        assertEquals(1, (int) list.getHead().getData());
+
+        list.deleteHead();
+        assertEquals(null, list.getHead());
+        assertEquals(null, list.getTail());
     }
 
     /**
@@ -188,18 +243,76 @@ public class DLLTest {
      */
     @Test
     public void deleteTailTest() {
+        list.insertTail(1);
+        list.insertTail(2);
+        list.insertTail(3);
+
+        list.deleteTail();
+        assertEquals(2, (int) list.getTail().getData());
+
+        list.deleteTail();
+        assertEquals(1, (int) list.getTail().getData());
+
+        list.deleteTail();
+        assertEquals(null, list.getHead());
+        assertEquals(null, list.getTail());
     }
 
-    @Test
-    public void deleteTest() {
-    }
+/**
+ * Tests the delete method
+ * 
+ */
+@Test
+public void deleteTest() {
+    DLL<Integer> list = new DLL<Integer>();
+    list.insertHead(1);
+    list.insertTail(2);
+    list.insertTail(3);
+    list.insertTail(4);
 
+    // Test deleting a node in the middle of the list
+    list.delete(3);
+    assertNull(list.search(3));
+
+    // Test deleting the head node
+    list.delete(1);
+    assertNull(list.search(1));
+
+    // Test deleting the tail node
+    list.delete(4);
+    assertNull(list.search(4));
+}
+
+    /**
+     * Tests the print method
+     * 
+     */
     @Test
     public void printTest() {
+        DLL<Integer> list = new DLL<Integer>();
+        list.insertTail(50);
+        list.insertTail(33);
+        list.insertTail(158);
+
+        // Test printing the list
+
+        list.print();
     }
 
+    /**
+     * Tests the getSize method
+     * 
+     */
     @Test
-    public void getNodeSizeTest() {
+    public void getSizeTest() {
+        DLL<Integer> list = new DLL<Integer>();
+        list.insertHead(1);
+        list.insertTail(2);
+        list.insertTail(3);
+        list.insertTail(4);
+
+        // Test getting the size of the list
+        assertEquals(4, list.getSize());
     }
 
 

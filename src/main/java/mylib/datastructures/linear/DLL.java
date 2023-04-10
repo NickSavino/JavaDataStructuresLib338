@@ -128,33 +128,38 @@ public class DLL<T extends Comparable<T>> {
      * @param node
      */
     public void sortedInsert(T node) {
-        // TODO: Implement this method
         if (!isSorted()) {
             sort();
         }
 
-        DNode<T> curr = head;
-        if (curr == null) {
+        DNode<T> newNode = new DNode<T>(node);
+
+
+        // If the list is empty, insert at head
+        if (head == null) {
             insertHead(node);
             return;
         }
 
-        DNode<T> newNode = new DNode<T>(node);
-
-        int index = 0;
-        while (curr.getNext() != null) {
-            if (curr.getData() == newNode.getData()) {
-                return;
-            }
-            if (newNode.compareTo(curr.getNext()) < 0) {
-                insert(node, index);
-                return;
-            }
-            curr = curr.getNext();
-            index++;
+        // If the new node is less than the head, insert at head
+        if (newNode.compareTo(head) < 0) {
+            insertHead(node);
+            return;
         }
 
-        insertTail(node);
+        DNode<T> curr = head;
+
+
+        // traverse list until suitable location is found
+        while (curr.getNext() != null && newNode.compareTo(curr.getNext()) >= 0) {
+            curr = curr.getNext();
+        }
+
+        // Insert new Node
+        DNode<T> temp = curr.getNext();
+        curr.setNext(newNode);
+        newNode.setNext(temp);
+        size++;
         
     }
 
@@ -352,7 +357,7 @@ public class DLL<T extends Comparable<T>> {
      */
     public boolean isSorted() {
 
-        if (this.size == 0 || this.size == 1) {
+        if (this.size <= 1) {
             return true;
         }
 
@@ -361,7 +366,7 @@ public class DLL<T extends Comparable<T>> {
         // traverse through the list and check if the list is sorted
         while (curr.getNext() != null) {
                 
-            if (curr.compareTo(curr.getNext()) > 0) {
+            if (curr.getData().compareTo(curr.getNext().getData()) > 0) {
                 return false;
             }
             curr = curr.getNext();
