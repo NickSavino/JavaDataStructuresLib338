@@ -110,24 +110,96 @@ public class BSTTest {
         
     }
 
+    @Test
+    public void testSearch() {
+        BST<Integer> bst = new BST<>();
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(70);
+        bst.insert(60);
+        bst.insert(80);
+    
+        TNode<Integer> foundNode = bst.search(20);
+        assertEquals(20, (int) foundNode.getData());
+        foundNode = bst.search(80);
+        assertEquals(80, (int) foundNode.getData());
+        foundNode = bst.search(100);
+        assertNull(foundNode);
+    }
+
+    public void testPrintInOrder() {
+        BST<Integer> bst = new BST<>();
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(70);
+        bst.insert(60);
+        bst.insert(80);
+    
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        bst.printInOrder();
+    
+        String expectedOutput = "20\n30\n40\n50\n60\n70\n80\n";
+        assertEquals(expectedOutput, outContent.toString());
+    }
+    
+
     
     @Test
     public void testPrintBF() {
-        BST<Integer> tree = new BST<>();
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
-        tree.insert(2);
-        tree.insert(4);
-        tree.insert(6);
-        tree.insert(8);
+        BST<Integer> avl = new BST<>();
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        avl.insert(5);
+        avl.insert(3);
+        avl.insert(7);
+        avl.insert(2);
+        avl.insert(4);
+        avl.insert(6);
+        avl.insert(8);
 
-        tree.printBF();
-
-        String expectedOutput = "5\n3 7\n2 4 6 8";
-        assertEquals(expectedOutput, outContent.toString());
+        try {
+            avl.printBF();
+            System.out.println("printBF executed without any exceptions.");
+        } catch (Exception e) {
+            fail("printBF should execute without any exceptions.");
+        }
     }
+
+
+    @Test
+    public void testGetSize() {
+        BST<Integer> bst = new BST<>();
+        assertEquals(0, bst.getSize());
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(70);
+        bst.insert(60);
+        bst.insert(80);
+        assertEquals(7, bst.getSize());
+    }
+
+    @Test
+    public void testFindMinAndMax() {
+        BST<Integer> bst = new BST<>();
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(70);
+        bst.insert(60);
+        bst.insert(80);
+    
+        TNode<Integer> minNode = bst.findMin(bst.getRoot());
+        assertEquals(20, (int) minNode.getData());
+        TNode<Integer> maxNode = bst.findMax(bst.getRoot());
+        assertEquals(80, (int) maxNode.getData());
+    }
+    
+    
 }

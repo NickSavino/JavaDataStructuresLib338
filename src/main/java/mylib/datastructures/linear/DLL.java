@@ -21,6 +21,12 @@ public class DLL<T extends Comparable<T>> {
         this.size = 1;
     }
 
+    public DLL(DNode<T> head) {
+        this.head = head;
+        this.tail = head;
+        this.size = 1;
+    }
+
     /**
      * inserts a node at the head of the list
      * 

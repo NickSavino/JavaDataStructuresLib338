@@ -8,25 +8,46 @@ public class BST<T extends Comparable<T>> {
     protected TNode<T> root;
 
     protected int size;
+    
 
+    /**
+     * Default constructor
+     */
     public BST() {
         this.root = null;
     }
 
+
+    /**
+     * Constructor with data
+     * @param data the data to be inserted into the tree
+     */
     public BST(T data) {
         this.root = new TNode<>(data);
         this.size++;
     }
 
+    /**
+     * Constructor with node
+     * @param obj the node to be inserted into the tree
+     */
     public BST(TNode<T> obj) {
         this.root = obj;
         this.size++;
     }
 
+    /**
+     * Returns the root of the tree
+     * @return the root of the tree
+     */
     public TNode<T> getRoot() {
         return this.root == null ? null : this.root;
     }
 
+    /**
+     * sets the root of the tree
+     * @param data the data to be inserted into the tree
+     */
     public void setRoot(T data) {
         this.root = new TNode<T>(data);
         this.size++;
@@ -47,7 +68,7 @@ public class BST<T extends Comparable<T>> {
      * meant for protected access
      * @param node
      */
-    protected void insert(TNode<T> node) {
+    public void insert(TNode<T> node) {
         root = insertHelper(root, node);
         this.size++;
     }
@@ -152,9 +173,9 @@ public class BST<T extends Comparable<T>> {
      * @param root
      * @return the minimum value in the tree
      */
-    private TNode<T> findMin(TNode<T> root) {
+    public TNode<T> findMin(TNode<T> root) {
         while(root.getLeft() != null) {
-            root = root.getRight();
+            root = root.getLeft();
         }
         return root;
     }
@@ -164,10 +185,9 @@ public class BST<T extends Comparable<T>> {
      * @param root
      * @return the maximum value in the tree
      */
-    private TNode<T> findMax(TNode<T> root) {
-        root = root.getLeft();
-        while(root.getLeft() != null) {
-            root = root.getLeft();
+    public TNode<T> findMax(TNode<T> root) {
+        while(root.getRight() != null) {
+            root = root.getRight();
         }
         return root;
     }
@@ -238,6 +258,7 @@ public class BST<T extends Comparable<T>> {
             printLevel(root.getLeft(), level - 1);
             printLevel(root.getRight(), level - 1);
         }
+        
     }
 
     private int getHeight(TNode<T> root) {
@@ -265,6 +286,14 @@ public class BST<T extends Comparable<T>> {
      */
     public TNode<T> breadthFirstSearch(TNode<T> root) {
         return null;
+    }
+
+    /**
+     * Tests if the tree is empty
+     * @return true if the tree is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return root == null;
     }
 
 }
