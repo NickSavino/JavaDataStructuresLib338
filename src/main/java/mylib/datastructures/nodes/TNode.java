@@ -1,5 +1,6 @@
 package mylib.datastructures.nodes;
 
+
 public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
 
     private T data;
@@ -9,9 +10,8 @@ public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
     private TNode<T> left;
     private TNode<T> right;
 
-    int balance;
-
-
+    private int balance;
+    private int height = 1;
 
     public TNode() {
         this.data = null;
@@ -38,7 +38,8 @@ public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
         this.parent = node.parent;
         this.left = node.left != null ? new TNode<T>(node.left) : null;
         this.right = node.right != null ? new TNode<T>(node.right) : null;
-        this.balance = node.balance;
+        this.balance = node.balance != 0 ? node.balance : 0;
+        this.height = node.height != 0 ? node.height : 0;
     }
 
 
@@ -92,6 +93,22 @@ public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
 
     public boolean isRoot() {
         return this.parent == null;
+    }
+
+    public boolean isLeftChild() {
+        return this.parent != null && this.parent.getLeft() == this;
+    }
+
+    public boolean isRightChild() {
+        return this.parent != null && this.parent.getRight() == this;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
 

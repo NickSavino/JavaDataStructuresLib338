@@ -8,7 +8,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      * Constructor to initialize an empty list
      */
     public CDLL() {
-        // TODO: Implement constructor
+        super();
     }
 
     /**
@@ -17,7 +17,15 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      * @param node the node to initialize the list with
      */
     public CDLL(DNode<T> node) {
-        // TODO: Implement constructor overload
+            super(node);
+    }
+
+    /**
+     * Constructor overload with data initializes the list with head and tail pointing
+     * @param data the data to initialize the list with
+     */
+    public CDLL(T data) {
+        super(data);
     }
 
     /**
@@ -26,7 +34,14 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      */
     @Override
     public void insertHead(T node) {
-        // TODO: Implement insertHead
+        if (this.head == null) {
+            this.head = new DNode<T>(node);
+            this.tail = this.head;
+            this.head.setNext(this.head);
+            this.head.setPrev(this.head);
+        } else {
+            DNode<T> newNode = new DNode<T>(node);
+        }
     }
 
     /**
