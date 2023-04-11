@@ -109,6 +109,7 @@ public class CSLLTest {
         list.insertTail(5);
         list.insertTail(10);
         list.insertTail(15);
+    
 
         assertTrue(list.isSorted());
 

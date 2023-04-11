@@ -203,6 +203,9 @@ public class SLL<T extends Comparable<T>> {
      * Deletes the head node if found
      */
     public void deleteHead() {
+        if (head == null) {
+            return;
+        }
         SNode<T> temp = head;
         head = head.getNext();
         temp.setNext(null);
@@ -376,6 +379,9 @@ public class SLL<T extends Comparable<T>> {
      * @return
      */
     public SNode<T> getHead() {
+        if (head == null) {
+            return null;
+        }
         SNode<T> temp = new SNode<T>(head);
         return temp;
     }
