@@ -17,7 +17,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
     }
 
     @Override
-    public void setRoot(TNode<T> root) {
+    public void setRoot(T root) {
         // TODO: Implement this method
     }
 
@@ -26,10 +26,10 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
         // TODO: Implement this method
     }
 
-    @Override
-    public void insert(TNode<T> node) {
-        // TODO: Implement this method
-    }
+    // @Override
+    // private void insert(TNode<T> node) {
+    //     // TODO: Implement this method
+    // }
 
     public void delete(T data) {
         // TODO: Implement this method (Bonus)

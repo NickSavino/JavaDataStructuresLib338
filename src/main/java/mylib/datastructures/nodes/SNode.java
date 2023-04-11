@@ -34,6 +34,9 @@ public class SNode<T extends Comparable<T>> implements Comparable<SNode<T>> {
 
     public T getData() {
         T data = this.data;
+        if (data == null) {
+            return null;
+        }
         return data;
     }
 

@@ -38,18 +38,21 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
      */
     public T dequeue() {
         
-        if (isEmpty()) {
+        if (this.size == 0) {
             return null;
         }
 
         SNode<T> data = super.getHead();
         super.deleteHead();
         this.size--;
+        if (data == null) {
+            return null;
+        }
         return data.getData();
     }
 
     public T peek() {
-        if (isEmpty()) {
+        if (this.size == 0) {
             return null;
         }
         return super.getHead().getData();
