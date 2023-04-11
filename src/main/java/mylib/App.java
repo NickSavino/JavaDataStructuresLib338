@@ -9,21 +9,17 @@ import mylib.datastructures.trees.BST;
 public class App {
     public static void main(String[] args) {
 
-        BST<Integer> tree = new BST<>();
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
-        tree.insert(2);
-        tree.insert(1);
-        tree.insert(4);
-        tree.insert(6);
-        tree.insert(8);
-
-        tree.delete(3);
-        tree.printInOrder();
-
-        
-
+        BST<Integer> bst = new BST<Integer>();
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(70);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(60);
+        bst.insert(80);
+    
+        System.out.println("Breadth First Traversal (Level Order Traversal):");
+        bst.printBFQueue();
     }
 
 }

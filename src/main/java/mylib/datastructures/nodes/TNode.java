@@ -36,14 +36,14 @@ public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
     public TNode(TNode<T> node) {
         this.data = node.data;
         this.parent = node.parent;
-        this.left = node.left;
-        this.right = node.right;
+        this.left = node.left != null ? new TNode<T>(node.left) : null;
+        this.right = node.right != null ? new TNode<T>(node.right) : null;
         this.balance = node.balance;
     }
 
 
     public T getData() {
-        T tmp = this.data;
+        T tmp = this.data == null ? null : this.data;
         return tmp;
     }
 
