@@ -6,7 +6,7 @@ public class DLL<T extends Comparable<T>> {
 
     protected DNode<T> head;
     protected DNode<T> tail;
-    private int size;
+    protected int size;
 
     public DLL() {
         this.head = null;
@@ -199,9 +199,10 @@ public class DLL<T extends Comparable<T>> {
             return;
         }
         // If the head is the tail, set the tail and head to null
-        if (head == tail) {
-            head = null;
-            tail = null;
+        if (this.size == 1) {
+            head.setNext(null);
+            tail.setPrev(null);
+            this.size--;
         }
 
 
@@ -214,6 +215,7 @@ public class DLL<T extends Comparable<T>> {
         temp.setNext(null);
 
         this.size--;
+        
     }
 
     /**
@@ -388,8 +390,11 @@ public class DLL<T extends Comparable<T>> {
      * @return
      */
     public DNode<T> getHead() {
-        DNode<T> temp = new DNode<T>(head.getData());
-        return temp;
+        if (head != null) {
+            DNode<T> temp = new DNode<T>(head.getData());
+            return temp;
+        }
+        return null;
     }
 
     /**
@@ -398,8 +403,11 @@ public class DLL<T extends Comparable<T>> {
      * @return
      */
     public DNode<T> getTail() {
-        DNode<T> temp = new DNode<T>(tail.getData());
-        return temp;
+        if (tail != null) {
+            DNode<T> temp = new DNode<T>(tail.getData());
+            return temp;
+        }
+        return null;
     }
 
     

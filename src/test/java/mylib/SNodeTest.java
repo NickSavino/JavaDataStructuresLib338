@@ -12,11 +12,9 @@ public class SNodeTest {
     
     @Test
     public void testConstructorTypes() {
-
         SNode<Integer> node = new SNode<Integer>();
         SNode<String> node2 = new SNode<String>();
         SNode<Boolean> node3 = new SNode<Boolean>();
-
     }
 
 

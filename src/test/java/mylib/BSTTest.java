@@ -151,20 +151,23 @@ public class BSTTest {
     
     @Test
     public void testPrintBF() {
-        BST<Integer> avl = new BST<>();
+        BST<Integer> bst = new BST<>();
 
-        avl.insert(5);
-        avl.insert(3);
-        avl.insert(7);
-        avl.insert(2);
-        avl.insert(4);
-        avl.insert(6);
-        avl.insert(8);
+        // for (int i = 0; i < 10; i++) {
+        //     bst.insert(i);
+        // }
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(2);
+        bst.insert(4);
+        bst.insert(6);
+        bst.insert(8);
+        bst.printBFQueue();
 
         try {
-            avl.printBF();
-            System.out.println("printBF executed without any exceptions.");
         } catch (Exception e) {
+            e.printStackTrace();
             fail("printBF should execute without any exceptions.");
         }
     }
