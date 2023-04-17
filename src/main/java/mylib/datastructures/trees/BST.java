@@ -214,18 +214,22 @@ public class BST<T extends Comparable<T>> {
 
 
     public void printBFQueue() {
-        if (root == null) {
+        if (root == null || this.size == 0) {
             return;
         }
     
         QueueLL<TNode<T>> queue = new QueueLL<TNode<T>>();
         queue.enqueue(root);
-    
+        System.out.println("Root: " + root);
+        System.out.println("root.getLeft(): " + root.getLeft());
+        printInOrder();
+        System.out.println("Printing tree using breadth first search");
         while (!queue.isEmpty()) {
             int nodeCount = queue.getSize();
             while (nodeCount > 0) {
                 TNode<T> curr = queue.dequeue();
-                System.out.print(curr.getData() + " ");
+                System.out.println("curr: " + curr);
+                
                 if (curr.getLeft() != null) {
                     queue.enqueue(curr.getLeft());
                 }
@@ -234,7 +238,6 @@ public class BST<T extends Comparable<T>> {
                 }
                 nodeCount--;
             }
-            System.out.println();
         }
     }
 
@@ -242,6 +245,7 @@ public class BST<T extends Comparable<T>> {
         int height = getHeight(root);
         for (int i = 1; i <= height; i++) {
             printLevel(root, i);
+            System.out.println();
         }
     }
 
@@ -258,7 +262,7 @@ public class BST<T extends Comparable<T>> {
             printLevel(root.getLeft(), level - 1);
             printLevel(root.getRight(), level - 1);
         }
-        
+
     }
 
     private int getHeight(TNode<T> root) {

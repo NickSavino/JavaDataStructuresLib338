@@ -1,6 +1,7 @@
 package mylib.datastructures.linear;
 
 import mylib.datastructures.nodes.DNode;
+import mylib.datastructures.nodes.TNode;
 
 public class CDLL<T extends Comparable<T>> extends DLL<T> {
     
@@ -33,15 +34,22 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      * @param node the node to be inserted
      */
     @Override
-    public void insertHead(T node) {
-        if (this.head == null) {
-            this.head = new DNode<T>(node);
-            this.tail = this.head;
-            this.head.setNext(this.head);
-            this.head.setPrev(this.head);
+    public void insertHead(T data) {
+        DNode<T> newNode = new DNode<>(data);
+
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            head.setNext(head);
+            head.setPrev(head);
         } else {
-            DNode<T> newNode = new DNode<T>(node);
+            newNode.setNext(head); // newNode.next = head;
+            newNode.setPrev(tail); // newNode.prev = tail;
+            head.setPrev(newNode); // head.prev = newNode;
+            tail.setNext(newNode); // tail.next = newNode;
+            head = newNode; // head = newNode;
         }
+        size++;
     }
 
     /**
@@ -49,8 +57,21 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      * @param node the node to be inserted
      */
     @Override
-    public void insertTail(T node) {
-        // TODO: Implement insertTail
+    public void insertTail(T data) {
+        if (this.tail == null) {
+            this.tail = new DNode<T>(data);
+            this.head = this.tail;
+            this.tail.setNext(this.tail);
+            this.tail.setPrev(this.tail);
+        } else {
+            DNode<T> newNode = new DNode<T>(data);
+            head.setPrev(newNode); // this.head.prev = newNode;
+            tail.setNext(newNode); // this.tail.next = newNode;
+            newNode.setPrev(this.tail); // newNode.prev = this.tail;
+            newNode.setNext(this.head); // newNode.next = this.head;
+            this.tail = newNode; // this.tail = newNode;
+        }
+        size++;
     }
 
     /**
@@ -60,7 +81,32 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      */
     @Override
     public void insert(T node, int index) {
-        // TODO: Implement insert
+        
+        if (index < 0 || index > this.size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        
+        DNode<T> nodeToInsert = new DNode<T>(node);
+        DNode<T> curr = this.head;
+        if (index == 0) {
+            insertHead(node);
+            return;
+        }
+        else if (index == this.size) {
+            insertTail(node);
+            return;
+        } else {
+            for (int i = 0; i < index; i++) {
+                curr = curr.getNext();
+            }  
+            nodeToInsert.setPrev(curr.getPrev());
+            nodeToInsert.setNext(curr);
+            curr.getPrev().setNext(nodeToInsert);
+            curr.setPrev(nodeToInsert);
+        }
+
+
+        this.size++;
     }
 
     /**
@@ -68,7 +114,18 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      */
     @Override
     public void deleteHead() {
-        // TODO: Implement deleteHead
+        if (this.head == null) {
+            throw new NullPointerException("List is empty");
+        }
+
+        if (this.head == this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.getNext();
+            this.head.setPrev(this.tail); // this.head.prev = this.tail;
+            this.tail.setNext(this.head); // this.tail.next = this.head;
+        }
     }
 
     /**
@@ -76,7 +133,19 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      */
     @Override
     public void deleteTail() {
-        // TODO: Implement deleteTail
+
+        if (this.tail == null) {
+            throw new NullPointerException("List is empty");
+        }
+
+        if (this.head == this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.tail = this.tail.getPrev();
+            this.tail.setNext(this.head); // this.tail.next = this.head;
+            this.head.setPrev(this.tail); // this.head.prev = this.tail;
+        }
     }
 
     /**
@@ -85,7 +154,34 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      */
     @Override
     public void delete(T node) {
-        // TODO: Implement delete
+        if (this.head == null) {
+            throw new NullPointerException("List is empty");
+        }
+
+        DNode<T> curr = this.head;
+        while (curr.getData() != node && curr != this.tail) {
+            curr = curr.getNext();
+        }
+       
+        if (curr == this.tail) {
+            this.deleteTail();
+        } else {
+            curr.getPrev().setNext(curr.getNext()); // curr.prev.next = curr.next;
+            curr.getNext().setPrev(curr.getPrev()); // curr.next.prev = curr.prev;
+        }
+    }
+
+
+    @Override
+    public void sortedInsert(T node) {
+        
+        if (!isSorted()) {
+            sort();
+        }
+
+        DNode<T> nodeToInsert = new DNode<T>(node);
+        DNode<T> curr = this.head;
+        
     }
 
     /**
@@ -93,7 +189,14 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
      */
     @Override
     public void sort() {
-        // TODO: Implement sortAscending
+
+        if (this.head == null) {
+            return;
+        }
+
+        DNode<T> curr = this.head;
+    
+        
     }
 
     /**
@@ -113,6 +216,26 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
     @Override
     public void print() {
         // TODO: Implement print
+    }
+
+    /**
+     * Checks if the list is sorted
+     * @return true if the list is sorted, false otherwise
+     */
+    @Override
+    public boolean isSorted() {
+
+        if (this.head == null) {
+            return true;
+        }
+
+        DNode<T> curr = this.head;
+        while (curr.getNext() != this.head) {
+            if (curr.getData().compareTo(curr.getNext().getData()) > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

@@ -28,7 +28,6 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
      */
     public void enqueue(T node) {
         super.insertTail(node);
-        this.size++;
     }
 
     /**
