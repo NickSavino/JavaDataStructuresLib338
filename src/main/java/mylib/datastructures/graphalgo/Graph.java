@@ -21,7 +21,7 @@ public class Graph {
         this.size = 0;
         this.adjacencyMatrix = new int[1][1];
         this.adjacencyList = new ArrayList<>();
-        this.adjacencyList.add(new ArrayList<>());
+        //this.adjacencyList.add(new ArrayList<>());
         addVertex(firstNode);
     }
 
@@ -29,7 +29,7 @@ public class Graph {
     public void addVertex(int vertex) {
         if (!adjacencyList.isEmpty() && adjacencyList.size() < order + 1) {
             // If using adjacency list, ensure size is sufficient
-            adjacencyList.add(new ArrayList<>());
+            //adjacencyList.add(new ArrayList<>());
         }
         if (adjacencyMatrix.length < order + 1) {
             // If using adjacency matrix, ensure size is sufficient
@@ -87,7 +87,7 @@ public class Graph {
 
     // Find the shortest path using Dijkstra's algorithm
     public void dijkstra(int start) {
-        PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>(Comparator.comparingInt(Pair::getValue));
+        PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>();
         int[] distance = new int[order];
         Arrays.fill(distance, Integer.MAX_VALUE);
         distance[start] = 0;
