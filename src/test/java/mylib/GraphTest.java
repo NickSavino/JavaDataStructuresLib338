@@ -1,3 +1,7 @@
+package mylib;
+
+import mylib.datastructures.graphalgo.*;
+
 public class GraphTest {
     public static void main(String[] args) {
         Graph graph = new Graph(0);
@@ -15,7 +19,7 @@ public class GraphTest {
         graph.addEdge(3, 4, 5);
         graph.addEdge(4, 5, 6);
 
-        boolean[] visited = new boolean[graph.order];
+        boolean[] visited = new boolean[100];
         System.out.println("DFS:");
         graph.dfs(1, visited);
         System.out.println();
